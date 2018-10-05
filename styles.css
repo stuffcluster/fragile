@@ -1,0 +1,17 @@
+.splitscreen {
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+}
+
+.playerCard {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 50px;
+    padding: 30px;
+    background: coral;
+    width: 400px;
+    height: 600px;
+}

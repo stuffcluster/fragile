@@ -2,11 +2,19 @@
 <html>
   <head>
     <meta charset="UTF-8">
-    <title>title</title>
+    <title>fragile</title>
+    <link rel="stylesheet" type="text/css" href="styles.css">
   </head>
   <body>
-    <button onclick="hit(this)" value="player one">player one hit</button>
-    <button onclick="hit(this)" value="player two">player two hit</button>
+
+    <div class="splitscreen">
+      <div class="playerCard playerCard-one">
+        <div id="playerOneStats"></div>
+        <button onclick="players.playerOne.takeDamage(1)">ATTACK</button>
+      </div>
+      <div class="playerCard playerCard-two"></div>
+    </div>
+
   </body>
   <script type="text/javascript" src="script.js">
   </script>
