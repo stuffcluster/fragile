@@ -6,6 +6,7 @@ class player {
     takeDamage(amount) {
         this.health = this.health - amount;
         console.log(this.health);
+        document.querySelector("#playerOneStats").innerHTML = getStats(players.playerOne); // OMFG I can't believe this works
     };
 
 };
@@ -15,17 +16,21 @@ class player {
 var players = {};
 
 function init() {
-    players.playerOne = new player("Mark", 3);
+    players.playerOne = new player("Mark", 10);
     players.playerTwo = new player("Lewis", 3);
 
     document.querySelector("#playerOneStats").innerHTML = getStats(players.playerOne);
-    
+
     console.table(players);
 };
 
 function getStats(player) { // should this be a method? a getter on the player object?
   return (
-      `<h1>${player.name}</h1>`
+    // hpw to update this on change?
+      `
+      <h1>${player.name}</h1>
+      <h1>HP: ${player.health}</h1>
+      `
   ); 
 }
 
