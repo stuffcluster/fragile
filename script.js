@@ -10,14 +10,13 @@ class player {
     };
 
 };
-
 // the global variable has to be defined, not just declared 
 // using var instead of let or const so it can be inspected in dev tools
 var players = {};
 
 function init() {
     players.playerOne = new player("Mark", 10);
-    players.playerTwo = new player("Lewis", 3);
+    players.playerTwo = new player("Lewis", 10);
 
     document.querySelector("#playerOneStats").innerHTML = getStats(players.playerOne);
 
