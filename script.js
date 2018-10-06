@@ -1,37 +1,38 @@
 class player {
-    constructor(name, health){
+    constructor(name, health, might){
         this.name = name;
         this.health = health;
+        this.might = might;
     };
     takeDamage(amount) {
         this.health = this.health - amount;
-        console.log(this.health);
-        document.querySelector("#playerOneStats").innerHTML = getStats(players.playerOne); // OMFG I can't believe this works
+        this.render();
     };
 
+    render() {
+        let playerInfo = (
+            `<h1>${this.name}</h1>
+            <h1>HP: ${this.health}</h1>
+            <h1>MIGHT: ${this.might}</h1>`
+        );
+        document.querySelector(`#${this.name}`).innerHTML = playerInfo;
+    }
+
 };
-// the global variable has to be defined, not just declared 
-// using var instead of let or const so it can be inspected in dev tools
+
 var players = {};
 
 function init() {
-    players.playerOne = new player("Mark", 10);
-    players.playerTwo = new player("Lewis", 10);
+    players.playerOne = new player("Mark", 10, 12); //haaaaack
+    players.playerTwo = new player("Lewis", 10, 12);
 
-    document.querySelector("#playerOneStats").innerHTML = getStats(players.playerOne);
+    players.playerOne.render();
+    players.playerTwo.render(); //do as foreach
 
     console.table(players);
 };
 
-function getStats(player) { // should this be a method? a getter on the player object?
-  return (
-    // hpw to update this on change?
-      `
-      <h1>${player.name}</h1>
-      <h1>HP: ${player.health}</h1>
-      `
-  ); 
-}
+
 
 window.onload = init(); 
 
