@@ -1,3 +1,16 @@
+class environment {
+    rollDice(sides, throws){ // helper function? should be environmental, not player.method?
+        let result = 0;
+        for(let i=0; i<throws ; i++) {
+            let singleDie = Math.floor(Math.random() * sides) + 1;
+            result += singleDie;
+        };
+        console.log(result);
+        return result;
+        // if we bump numbers into an array, we can iterate over them and render some kind of dice UI
+    };
+}
+
 class player {
     constructor(name, health, might, defense, attack, modifier){
         this.name = name;
@@ -11,16 +24,16 @@ class player {
         this.health = this.health - amount;
         this.render();
     };
-    rollDice(sides, throws){ // helper function? should be environmental, not player.method?
-        let result = 0;
-        for(let i=0; i<throws ; i++) {
-            let singleDie = Math.floor(Math.random() * sides) + 1;
-            result += singleDie;
-        };
-        console.log(result);
-        return result;
-        // if we bump numbers into an array, we can iterate over them and render some kind of dice UI
-    }
+    // rollDice(sides, throws){ // helper function? should be environmental, not player.method?
+    //     let result = 0;
+    //     for(let i=0; i<throws ; i++) {
+    //         let singleDie = Math.floor(Math.random() * sides) + 1;
+    //         result += singleDie;
+    //     };
+    //     console.log(result);
+    //     return result;
+    //     // if we bump numbers into an array, we can iterate over them and render some kind of dice UI
+    // }
     render() {
         let playerInfo = (
             `<h1>${this.name}</h1>
@@ -40,8 +53,9 @@ class player {
 
 var players = {};
 
-function init() { // should be generatePlayers or call generatePlayers or something 
-    players.playerOne = new player("Mark", 10, 12, 10 , 10, 10, 10,);
+function init() { // should be generatePlayers or call generatePlayers or something
+    arena = new environment(); 
+    players.playerOne = new player("Mark", arena.rollDice(6,1), arena.rollDice(6,1) , arena.rollDice(6,1), arena.rollDice(6,1), arena.rollDice(6,1),);
     players.playerTwo = new player("Lewis", 10, 12, 10 , 10, 10, 10);
     players.playerThree = new player("Jim", 10, 12, 10 , 10, 10, 10);
             
