@@ -11,6 +11,16 @@ class player {
         this.health = this.health - amount;
         this.render();
     };
+    rollDice(sides, throws){ // helper function? should be environmental, not player.method?
+        let result = 0;
+        for(let i=0; i<throws ; i++) {
+            let singleDie = Math.floor(Math.random() * sides) + 1;
+            result += singleDie;
+        };
+        console.log(result);
+        return result;
+        // if we bump numbers into an array, we can iterate over them and render some kind of dice UI
+    }
     render() {
         let playerInfo = (
             `<h1>${this.name}</h1>
@@ -30,11 +40,12 @@ class player {
 
 var players = {};
 
-function init() { // should be generatePlayers or something
+function init() { // should be generatePlayers or call generatePlayers or something 
     players.playerOne = new player("Mark", 10, 12, 10 , 10, 10, 10,);
     players.playerTwo = new player("Lewis", 10, 12, 10 , 10, 10, 10);
     players.playerThree = new player("Jim", 10, 12, 10 , 10, 10, 10);
             
+
     Object.keys(players).forEach(playerObjectKey => {
         const cardArea = document.querySelector(".splitscreen");
         let playerName = players[playerObjectKey].name;
@@ -43,11 +54,24 @@ function init() { // should be generatePlayers or something
         node.innerHTML = `
             <div id="${playerName}"></div>
             <button onclick="players.${playerObjectKey}.takeDamage(1)">TAKE DAMAGE</button>
+            <button onclick="players.${playerObjectKey}.rollDice(6,1)">ROLL DICE</button>
         `;
         cardArea.appendChild(node);
         players[playerObjectKey].render();
     });
 };
+
+// function rollDice(sides, throws){ // helper function
+//     let result = 0;
+//     for(let i=0; i<throws ; i++) {
+//         let singleDie = Math.floor(Math.random() * sides) + 1;
+//         result += singleDie;
+//     };
+//     return result;
+//     // console.log(result);
+//     // if we bump numbers into an array, we can iterate over them and render some kind of dice UI
+// }
+
 
 window.onload = init(); 
 
