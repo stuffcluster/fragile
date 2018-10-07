@@ -8,7 +8,6 @@ class player {
         this.health = this.health - amount;
         this.render();
     };
-
     render() {
         let playerInfo = (
             `<h1>${this.name}</h1>
@@ -17,19 +16,27 @@ class player {
         );
         document.querySelector(`#${this.name}`).innerHTML = playerInfo;
     }
-
 };
 
 var players = {};
 
-function init() {
-    players.playerOne = new player("Mark", 10, 12); //haaaaack
+function init() { // should be generatePlayers or something
+    players.playerOne = new player("Mark", 10, 12);
     players.playerTwo = new player("Lewis", 10, 12);
-
-    players.playerOne.render();
-    players.playerTwo.render(); //do as foreach
-
-    console.table(players);
+            
+    Object.keys(players).forEach(playerObjectKey => {
+        const cardArea = document.querySelector(".splitscreen");
+        let playerName = players[playerObjectKey].name;
+        const node = document.createElement("div");
+        node.innerHTML = `
+            <div class="playerCard">
+            <div id="${playerName}"></div>
+            <button onclick="players.${playerObjectKey}.takeDamage(1)">TAKE DAMAGE</button>
+            </div
+        `;
+        cardArea.appendChild(node);
+        players[playerObjectKey].render();
+    });
 };
 
 
