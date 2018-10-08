@@ -58,7 +58,8 @@
     align-self: flex-end; /* do anything ? */
 }
 
-.mightIcon {
+.mightIcon,
+.shieldIcon {
     width: 100px;
     height: auto;
     margin: 2px;

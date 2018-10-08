@@ -55,7 +55,7 @@ class player {
             `<h1>${this.name}</h1>
             <div id="${this.name}-health" class="healthBar"></div>
             <div id="${this.name}-might" class="mightBar"><h1>${this.might}</h1></div>
-            <h1>DEF: ${this.defense}</h1>
+            <div id="${this.name}-shield"><h1>${this.defense}</h1><div>
             <h1>ATT: ${this.attack}</h1>
             <h1>MOD: ${this.modifier}</h1>
             `
@@ -85,8 +85,18 @@ class player {
         mightNode.classList.add("mightIcon");
         mightNode.innerHTML = arm;
         mightBar.appendChild(mightNode);
+    
+        let shield = `<svg xmlns="http://www.w3.org/2000/svg"  viewBox="0 0 352.644 352.644">
+        <path d="M324.478 51.943L177.986.285a4.994 4.994 0 0 0-3.326 0L28.166 51.943a5 5 0 0 0-3.337 4.715c0 52.278 13.834 112.711 37.956 165.805 19.566 43.069 54.751 100.519 111.248 129.625a5 5 0 0 0 4.58 0c56.496-29.106 91.68-86.556 111.247-129.625 24.121-53.094 37.955-113.527 37.955-165.805a5 5 0 0 0-3.337-4.715z"/>
+      </svg>
+      `;
+        let shieldBar = document.querySelector(`#${this.name}-shield`);
 
-    }  
+        let shieldNode = document.createElement("div");
+        shieldNode.classList.add("shieldIcon");
+        shieldNode.innerHTML = shield;
+        shieldBar.appendChild(shieldNode);
+    } 
 };
 
 function init() {
