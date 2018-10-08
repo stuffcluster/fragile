@@ -1,3 +1,9 @@
+:root {
+    --red: red;
+    --purple: purple;
+}
+
+
 .splitscreen {
     width: 100%;
     display: flex;
@@ -20,4 +26,34 @@
     width: 50px;
     height: 50px;
     background: white;
+}
+
+.heart {
+    fill: url(#grad1);
+}
+
+svg.heart-copy {
+    --outer: red;
+    --inner: var(--purple);
+    width: 1000px;
+}
+
+svg.shield-icon {
+    fill: red;
+}
+
+.heartIcon {
+    width: 30px;
+    height: 30px;
+    margin: 2px;
+}
+
+.heartIcon svg {
+    width: 100%;
+    height: 100%;
+}
+
+.healthBar {
+    display: flex;
+    flex-wrap: wrap;
 }
