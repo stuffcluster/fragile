@@ -13,8 +13,7 @@
 .playerCard {
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    align-items: center;
+    align-items: flex-start;
     margin: 50px;
     padding: 30px;
     background: coral;
@@ -32,6 +31,7 @@
     width: 30px;
     height: 30px;
     margin: 2px;
+    transform: rotate(45deg);
 }
 
 .heartIcon svg {
@@ -43,4 +43,5 @@
 .healthBar {
     display: flex;
     flex-wrap: wrap;
+    /* transform: rotate(20deg); */
 }
