@@ -34,22 +34,33 @@
     transform: rotate(45deg);
 }
 
-.heartIcons svg,
-.mightIcons svg {
+.heartIcon svg {
     width: 100%;
     height: 100%;
     fill: darkred;
 }
 
-.healthBar,
-.mightBar {
+.healthBar {
     display: flex;
     flex-wrap: wrap;
     /* transform: rotate(20deg); */
 }
 
-.mightIcons {
-    width: 30px;
-    height: 30px;
+.mightBar {
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+.mightBar h1 {
+    font-size: 50px;
+    align-self: flex-end; /* do anything ? */
+}
+
+.mightIcon {
+    width: 100px;
+    height: auto;
     margin: 2px;
 }
+
