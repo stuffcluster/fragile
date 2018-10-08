@@ -1,5 +1,9 @@
 class environment {
-    rollDice(sides, throws){ // helper function? should be environmental, not player.method?
+    constructor(){
+        this.players = {};
+        this.turn = 0; // not used yet
+    };
+    rollDice(sides, throws){ // import as helper function?
         let result = 0;
         for(let i=0; i<throws ; i++) {
             let singleDie = Math.floor(Math.random() * sides) + 1;
@@ -7,10 +11,32 @@ class environment {
         };
         console.log(result);
         return result;
-        // if we bump numbers into an array, we can iterate over them and render some kind of dice UI
+    };
+    makePlayers(names){
+        names.forEach((name, index) => {
+            this.players[index] = new player(name, this.rollDice(20, 1), this.rollDice(20, 1), this.rollDice(20, 1), this.rollDice(20, 1), 0);
+        });
+    };
+    renderPlayers(){
+        Object.keys(this.players).forEach(playerObjectKey => {
+            const cardArea = document.querySelector(".splitscreen");
+            let playerName = this.players[playerObjectKey].name;
+            const node = document.createElement("div");
+            node.className = "playerCard";
+            node.innerHTML = `
+                <div id="${playerName}"></div>
+                <button onclick="arena.players[${playerObjectKey}].takeDamage(1)">TAKE DAMAGE</button>
+                <button class="D6" onclick="arena.rollDice(6,1)">D6</button>
+                <button class="D8" onclick="arena.rollDice(8,1)">D8</button>
+                <button class="D10" onclick="arena.rollDice(10,1)">D10</button>
+                <button class="D12" onclick="arena.rollDice(12,1)">D12</button>
+                <button class="D20" onclick="arena.rollDice(20,1)">D20</button>
+            `;
+            cardArea.appendChild(node);
+            arena.players[playerObjectKey].render();
+        });
     };
 }
-
 class player {
     constructor(name, health, might, defense, attack, modifier){
         this.name = name;
@@ -24,16 +50,6 @@ class player {
         this.health = this.health - amount;
         this.render();
     };
-    // rollDice(sides, throws){ // helper function? should be environmental, not player.method?
-    //     let result = 0;
-    //     for(let i=0; i<throws ; i++) {
-    //         let singleDie = Math.floor(Math.random() * sides) + 1;
-    //         result += singleDie;
-    //     };
-    //     console.log(result);
-    //     return result;
-    //     // if we bump numbers into an array, we can iterate over them and render some kind of dice UI
-    // }
     render() {
         let playerInfo = (
             `<h1>${this.name}</h1>
@@ -48,44 +64,11 @@ class player {
     }
 };
 
-
-// Players and init could be on a class called "encounter" or something? it would have methods that contol the logic for the combat, perhaps? players object below would be state for that class and init would be one of its methods?
-
-var players = {};
-
-function init() { // should be generatePlayers or call generatePlayers or something
+function init() {
     arena = new environment(); 
-    players.playerOne = new player("Mark", arena.rollDice(6,1), arena.rollDice(6,1) , arena.rollDice(6,1), arena.rollDice(6,1), arena.rollDice(6,1),);
-    players.playerTwo = new player("Lewis", 10, 12, 10 , 10, 10, 10);
-    players.playerThree = new player("Jim", 10, 12, 10 , 10, 10, 10);
-            
-
-    Object.keys(players).forEach(playerObjectKey => {
-        const cardArea = document.querySelector(".splitscreen");
-        let playerName = players[playerObjectKey].name;
-        const node = document.createElement("div");
-        node.className = "playerCard";
-        node.innerHTML = `
-            <div id="${playerName}"></div>
-            <button onclick="players.${playerObjectKey}.takeDamage(1)">TAKE DAMAGE</button>
-            <button onclick="players.${playerObjectKey}.rollDice(6,1)">ROLL DICE</button>
-        `;
-        cardArea.appendChild(node);
-        players[playerObjectKey].render();
-    });
+    arena.makePlayers(["Conan", "Mike"]);
+    arena.renderPlayers();
 };
-
-// function rollDice(sides, throws){ // helper function
-//     let result = 0;
-//     for(let i=0; i<throws ; i++) {
-//         let singleDie = Math.floor(Math.random() * sides) + 1;
-//         result += singleDie;
-//     };
-//     return result;
-//     // console.log(result);
-//     // if we bump numbers into an array, we can iterate over them and render some kind of dice UI
-// }
-
 
 window.onload = init(); 
 
