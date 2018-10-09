@@ -58,13 +58,26 @@
     align-self: flex-end; /* do anything ? */
 }
 
-.mightIcon,
-.shieldIcon {
+.mightIcon {
     width: 100px;
+    height: auto;
+    margin: 2px;
+}
+
+.shieldIcon {
+    width: 200px;
     height: auto;
     margin: 2px;
 }
 
 .might-text {
     fill: white;
+    font-size: 20px;
 }
+
+.shield-text {
+    fill: white;
+    font-size: 150px;
+}
+
+
