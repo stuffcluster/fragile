@@ -18,11 +18,11 @@ function init() {
   const playerTwoBoard = document.createElement("div");
   playerTwoBoard.className = battle.fighters[1].name;
   display.appendChild(playerTwoBoard);
-
 };
+
 const renderPlayer = (entity) => {
-  let playerOneBoard = document.querySelector(".playerOne");
-  let playerTwoBoard = document.querySelector(".playerTwo");
+  console.log(`${CSS.escape(entity.name)}`);
+  let playerBoard = document.querySelector(`.${entity.name}`);
   let stats = `
     <p>HP: ${entity.health}</p>
     <p>AT: ${entity.attack}</p>
@@ -30,9 +30,11 @@ const renderPlayer = (entity) => {
     <p>SP: ${entity.speed}</p>
     <p>ST: ${entity.stamina}</p>
   `;
-  playerOneBoard.innerHTML = stats;
+  console.log(playerBoard);
+  playerBoard.innerHTML = stats;
 }
 
+window.onload = init();
 window.battle = battle;
 window.hero = hero;
 window.GetStats = GetStats;
