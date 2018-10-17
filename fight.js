@@ -21,7 +21,7 @@ class Fight {
       console.log(`defender takes damage...${defender.health}HP remaining`);
     };
 
-    console.log(`ATT: ${attackScore} DEF: ${defendScore}`);
+    return (`ATT: ${attackScore} DEF: ${defendScore}`);
   }
   nextFighter() {
     const currentOrder = this.fighters;

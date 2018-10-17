@@ -1,4 +1,4 @@
-const heroStats = {
+export const heroStats = {
   name: "hero",
   health: 3,
   attack: 5,
@@ -7,7 +7,7 @@ const heroStats = {
   speed: 5
 };
 
-const monsterStats = {
+export const monsterStats = {
   name: "monster",
   health: 3,
   attack: 3,
@@ -15,5 +15,3 @@ const monsterStats = {
   stamina: 3,
   speed: 4
 };
-
-export { heroStats };

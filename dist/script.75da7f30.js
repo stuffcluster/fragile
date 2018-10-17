@@ -110,7 +110,7 @@ parcelRequire = (function (modules, cache, entry, globalName) {
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.heroStats = void 0;
+exports.monsterStats = exports.heroStats = void 0;
 var heroStats = {
   name: "hero",
   health: 3,
@@ -128,18 +128,14 @@ var monsterStats = {
   stamina: 3,
   speed: 4
 };
-},{}],"script.js":[function(require,module,exports) {
+exports.monsterStats = monsterStats;
+},{}],"entity.js":[function(require,module,exports) {
 "use strict";
 
-var _stats = require("./stats.js");
-
-function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest(); }
-
-function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance"); }
-
-function _iterableToArrayLimit(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
-
-function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -177,6 +173,30 @@ function () {
 
   return Entity;
 }();
+
+exports.default = Entity;
+;
+},{}],"fight.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance"); }
+
+function _iterableToArrayLimit(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
 
 var Fight =
 /*#__PURE__*/
@@ -217,7 +237,7 @@ function () {
       }
 
       ;
-      console.log("ATT: ".concat(attackScore, " DEF: ").concat(defendScore));
+      return "ATT: ".concat(attackScore, " DEF: ").concat(defendScore);
     }
   }, {
     key: "nextFighter",
@@ -247,19 +267,30 @@ function () {
   return Fight;
 }();
 
-function gatherStats(sample) {
-  blowsLanded = 0;
-  blowsBlocked = 0;
+var _default = Fight;
+exports.default = _default;
+},{}],"getStats.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = getStats;
+
+function getStats(sample) {
+  var blowsLanded = 0;
+  var blowsBlocked = 0;
+  var result;
 
   for (var i = 0; i < sample; i++) {
-    var result = battle.takeTurn(hero, monster);
+    var _result = battle.takeTurn(hero, monster);
 
-    switch (result) {
-      case result[0] > result[1]:
+    switch (_result) {
+      case _result[0] > _result[1]:
         blowsLanded++;
         break;
 
-      case result[1] > result[0]:
+      case _result[1] > _result[0]:
         blowsBlocked++;
         break;
 
@@ -272,21 +303,36 @@ function gatherStats(sample) {
   console.log("hero: ".concat(blowsLanded, " monster: ").concat(blowsBlocked));
 }
 
-var monsterStats = {
-  name: "monster",
-  health: 3,
-  attack: 3,
-  defend: 4,
-  stamina: 3,
-  speed: 4
+;
+},{}],"script.js":[function(require,module,exports) {
+"use strict";
+
+var _stats = require("./stats");
+
+var _entity = _interopRequireDefault(require("./entity"));
+
+var _fight = _interopRequireDefault(require("./fight"));
+
+var _getStats = _interopRequireDefault(require("./getStats"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var hero = new _entity.default(_stats.heroStats);
+var monster = new _entity.default(_stats.monsterStats);
+var battle = new _fight.default(hero, monster);
+
+var renderPlayer = function renderPlayer(entity) {
+  var playerOneBoard = document.querySelector(".player1");
+  var stats = "\n    HP: ".concat(entity.health, "\n  ");
+  playerOneBoard.innerHTML = stats;
 };
-var hero = new Entity(_stats.heroStats);
-var monster = new Entity(monsterStats);
-var battle = new Fight(hero, monster);
-console.log(hero);
+
 window.battle = battle;
 window.hero = hero;
-},{"./stats.js":"stats.js"}],"../../../../usr/local/lib/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+window.GetStats = _getStats.default;
+window.monster = monster;
+window.renderPlayer = renderPlayer;
+},{"./stats":"stats.js","./entity":"entity.js","./fight":"fight.js","./getStats":"getStats.js"}],"../../../../usr/local/lib/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -313,7 +359,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "50487" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "57272" + '/');
 
   ws.onmessage = function (event) {
     var data = JSON.parse(event.data);

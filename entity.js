@@ -1,4 +1,4 @@
-class Entity {
+export default class Entity {
   constructor({ name, health, attack, defend, stamina, speed }) {
     this.name = name;
     this.health = health;
@@ -10,6 +10,4 @@ class Entity {
   takeDamage(damage) {
     this.health -= damage;
   }
-}
-
-export default Entity;
+};
