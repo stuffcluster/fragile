@@ -11,6 +11,7 @@ const battle = new Fight(hero, monster);
 function init() {
   const display = document.querySelector(".display");
 
+  //make the divs
   const playerOneBoard = document.createElement("div");
   playerOneBoard.className = battle.fighters[0].name;
   display.appendChild(playerOneBoard);
@@ -18,6 +19,9 @@ function init() {
   const playerTwoBoard = document.createElement("div");
   playerTwoBoard.className = battle.fighters[1].name;
   display.appendChild(playerTwoBoard);
+
+  renderPlayer(battle.fighters[0]);
+  renderPlayer(battle.fighters[1]);
 };
 
 const renderPlayer = (entity) => {
