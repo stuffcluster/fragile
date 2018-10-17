@@ -1,0 +1,21 @@
+{
+  "name": "fragile",
+  "version": "1.0.0",
+  "description": "",
+  "main": "entity.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "parcel ./index.html --port 4321"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/stuffcluster/fragile.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/stuffcluster/fragile/issues"
+  },
+  "homepage": "https://github.com/stuffcluster/fragile#readme"
+}
