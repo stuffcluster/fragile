@@ -30,6 +30,7 @@ class Fight {
     console.log(this.fighters);
   }
   commence() {
+    let messageBoard = document.querySelector(".messageBoard");
     let [attacker, defender] = this.fighters;
     console.log(`
       ${attacker.name}(${attacker.speed}), 
@@ -37,12 +38,15 @@ class Fight {
       `);
 
     if (attacker.speed > defender.speed) {
-      console.log(`${attacker.name}'s initiative!`);
+      messageBoard.innerHTML = `${attacker.name}'s initiative!`;
     }
     else if (defender.speed > attacker.speed) {
-      console.log(`${defender.name}'s initiative!`); 
+      messageBoard.innerHTML = `${defender.name}'s initiative!`; 
     }
-    else console.log("no attacker initiative bonus");
+    else messageBoard.innerHTML = "no attacker initiative bonus";
+  }
+  clearMessage(){
+    document.querySelector(".display").innerHTML = "";
   }
 }
 

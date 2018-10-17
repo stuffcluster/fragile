@@ -9,12 +9,16 @@ const monster = new Entity(monsterStats);
 const battle = new Fight(hero, monster);
 
 function init() {
+  battle.clearMessage();
   const display = document.querySelector(".display");
-
-  //make the divs
+  //make the divs -- this can be DRYer
   const playerOneBoard = document.createElement("div");
   playerOneBoard.className = battle.fighters[0].name;
   display.appendChild(playerOneBoard);
+  
+  const messageBoard = document.createElement("div");
+  messageBoard.className = "messageBoard";
+  display.appendChild(messageBoard);
 
   const playerTwoBoard = document.createElement("div");
   playerTwoBoard.className = battle.fighters[1].name;
@@ -24,7 +28,7 @@ function init() {
   renderPlayer(battle.fighters[1]);
 };
 
-const renderPlayer = (entity) => {
+const renderPlayer = (entity) => { // should this be an entity method?
   console.log(`${CSS.escape(entity.name)}`);
   let playerBoard = document.querySelector(`.${entity.name}`);
   let stats = `
