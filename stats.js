@@ -1,17 +1,19 @@
+import rollDice from "./dice";
+
 export const heroStats = {
-  name: "bonker",
-  health: 3,
-  attack: 5,
-  defend: 3,
-  stamina: 3,
-  speed: 4
+  name: "Link",
+  health: rollDice(6, 1),
+  attack: rollDice(6, 1),
+  defend: rollDice(6, 1),
+  stamina: rollDice(6, 1),
+  speed: rollDice(6, 1)
 };
 
 export const monsterStats = {
-  name: "HabFab",
-  health: 3,
-  attack: 3,
-  defend: 4,
-  stamina: 6,
-  speed: 1
+  name: "Ganon",
+  health: rollDice(6, 1),
+  attack: rollDice(6, 1),
+  defend: rollDice(6, 1),
+  stamina: rollDice(6, 1),
+  speed: rollDice(6, 1)
 };

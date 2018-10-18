@@ -1,18 +1,4 @@
 class Fight {
-  // constructor(player1, player2) {
-  //   this.fighters = [player1, player2];
-  // }
-  // singleRoll(sides) {
-  //   return Math.floor(Math.random() * sides) + 1;
-  // }
-  // rollDice(sides, quantity) {
-  //   let total = 0;
-  //   for (let i = 0; i < quantity; i++) {
-  //     total += this.singleRoll(sides)
-  //   };
-  //   return total;
-  // }
-
   nextTurn() {
     let [attacker, defender] = this.fighters;
     const attackScore = this.singleRoll(6) + attacker.attack;
@@ -33,6 +19,7 @@ class Fight {
   commence() {
     let messageBoard = document.querySelector(".messageBoard");
     let [attacker, defender] = model.fighters;
+
     let nextMessage = document.createElement("p");
     nextMessage.className = "fade-off";
     // console.log(`

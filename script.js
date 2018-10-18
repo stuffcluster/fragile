@@ -1,6 +1,5 @@
 import { heroStats, monsterStats } from "./stats";
 import Entity from "./entity";
-import Fight from "./fight";
 import GetStats from "./getStats";
 
 const hero = new Entity(heroStats);
@@ -12,73 +11,57 @@ const model = {
 }
 
 const view = {
+  display: document.querySelector(".display"),
   messageBoard: document.querySelector(".messageBoard"),
+  
+  init() {
+    this.clear(this.display);
+    // add divs for fighter stats
+    model.fighters.forEach(
+      fighter => {
+        const playerBoard = document.createElement("div");
+        playerBoard.className = fighter.name;
+        this.display.appendChild(playerBoard);
+        //...and ca
+        this.renderPlayer(fighter);
+      }
+    );
+  },
+  renderPlayer(entity) {
+    const playerBoard = document.querySelector(`.${entity.name}`);
+    let stats = `
+      <h3>${entity.name}</h3>
+      <p>HP: ${entity.health}</p>
+      <p>AT: ${entity.attack}</p>
+      <p>DF: ${entity.defend}</p>
+      <p>SP: ${entity.speed}</p>
+      <p>ST: ${entity.stamina}</p>
+    `;
+    playerBoard.innerHTML = stats;
+  },
 
-  broadcast(message){
-    let messageNode = `<p class="fade-off">${message}</p>`
+  broadcast(message) {
+    let messageNode = `
+      <p class="fade-off">
+        ${message}
+      </p>
+    `
     this.messageBoard.innerHTML = messageNode;
   },
-  clear(element){
-    document.querySelector(`.${element}`).innerHTML = "";
+  clear(element) {
+    element.innerHTML="";
   }
 }
+
 const controller = {
   init() {
-    view.clear("display");
-    const display = document.querySelector(".display");
-    //make the divs -- this can be DRYer
-    const playerOneBoard = document.createElement("div");
-    playerOneBoard.className = model.fighters[0].name;
-    display.appendChild(playerOneBoard);
-    
-    // const messageBoard = document.createElement("div");
-    // messageBoard.className = "messageBoard";
-    // display.appendChild(messageBoard);
-  
-    const playerTwoBoard = document.createElement("div");
-    playerTwoBoard.className = model.fighters[1].name;
-    display.appendChild(playerTwoBoard);
-  
-    renderPlayer(model.fighters[0]);
-    renderPlayer(model.fighters[1]);
-  },
-  singleRoll(sides) {
-    return Math.floor(Math.random() * sides) + 1;
-  },
-
-  rollDice(sides, quantity) {
-    let total = 0;
-    for (let i = 0; i < quantity; i++) {
-      total += this.singleRoll(sides)
-    };
-    return total;
+    view.init();
   }
-
-}
-
-
-const battle = new Fight(hero, monster);
-
-
-const renderPlayer = (entity) => { // should this be an entity method?
-  // console.log(`${CSS.escape(entity.name)}`);
-  let playerBoard = document.querySelector(`.${entity.name}`);
-  let stats = `
-    <p>HP: ${entity.health}</p>
-    <p>AT: ${entity.attack}</p>
-    <p>DF: ${entity.defend}</p>
-    <p>SP: ${entity.speed}</p>
-    <p>ST: ${entity.stamina}</p>
-  `;
-  console.log(playerBoard);
-  playerBoard.innerHTML = stats;
 }
 
 window.onload = controller.init();
-window.battle = battle;
 window.hero = hero;
-window.GetStats = GetStats;
 window.monster = monster;
-window.renderPlayer = renderPlayer;
+window.GetStats = GetStats;
 window.model = model;
 window.view = view;
