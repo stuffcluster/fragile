@@ -1,6 +1,5 @@
 class Fight {
   constructor(player1, player2) {
-    this.turn = 0;
     this.fighters = [player1, player2];
   }
   singleRoll(sides) {
@@ -48,9 +47,6 @@ class Fight {
     else nextMessage.innerHTML = "no attacker initiative bonus";
     messageBoard.appendChild(nextMessage);
     setTimeout(()=> this.clear("messageBoard"), 2000);
-  }
-  clear(element){
-    document.querySelector(`.${element}`).innerHTML = "";
   }
 }
 
