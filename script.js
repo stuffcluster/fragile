@@ -2,12 +2,9 @@ import { heroStats, monsterStats } from "./stats";
 import Entity from "./entity";
 import GetStats from "./getStats";
 
-const hero = new Entity(heroStats);
-const monster = new Entity(monsterStats);
-
 const model = {
   turn: 0,
-  fighters: [hero, monster],
+  fighters: [],
 }
 
 const view = {
@@ -22,11 +19,12 @@ const view = {
         const playerBoard = document.createElement("div");
         playerBoard.className = fighter.name;
         this.display.appendChild(playerBoard);
-        //...and ca
+        //...and add their info
         this.renderPlayer(fighter);
       }
     );
   },
+
   renderPlayer(entity) {
     const playerBoard = document.querySelector(`.${entity.name}`);
     let stats = `
@@ -55,13 +53,14 @@ const view = {
 
 const controller = {
   init() {
+    const hero = new Entity(heroStats);
+    const monster = new Entity(monsterStats);
+    model.fighters = [hero, monster];
     view.init();
   }
 }
 
 window.onload = controller.init();
-window.hero = hero;
-window.monster = monster;
 window.GetStats = GetStats;
 window.model = model;
 window.view = view;
