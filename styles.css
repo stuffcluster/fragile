@@ -18,3 +18,16 @@
   display: flex;
   justify-content:space-between;
 }
+
+@keyframes fade-off {
+  to {
+    transform: translateY(-200px);
+    opacity: 0;
+  }
+}
+.fade-off {
+  animation-name: "fade-off";
+  animation-delay: 1s;
+  animation-duration: 1s;
+  animation-fill-mode: forwards;
+}

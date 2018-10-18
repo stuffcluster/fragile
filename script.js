@@ -9,7 +9,7 @@ const monster = new Entity(monsterStats);
 const battle = new Fight(hero, monster);
 
 function init() {
-  battle.clearMessage();
+  battle.clear("display");
   const display = document.querySelector(".display");
   //make the divs -- this can be DRYer
   const playerOneBoard = document.createElement("div");
@@ -29,7 +29,7 @@ function init() {
 };
 
 const renderPlayer = (entity) => { // should this be an entity method?
-  console.log(`${CSS.escape(entity.name)}`);
+  // console.log(`${CSS.escape(entity.name)}`);
   let playerBoard = document.querySelector(`.${entity.name}`);
   let stats = `
     <p>HP: ${entity.health}</p>

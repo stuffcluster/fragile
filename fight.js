@@ -32,21 +32,24 @@ class Fight {
   commence() {
     let messageBoard = document.querySelector(".messageBoard");
     let [attacker, defender] = this.fighters;
-    console.log(`
-      ${attacker.name}(${attacker.speed}), 
-      ${defender.name}(${defender.speed})
-      `);
-
+    let nextMessage = document.createElement("p");
+    nextMessage.className = "fade-off";
+    // console.log(`
+    //   ${attacker.name}(${attacker.speed}), 
+    //   ${defender.name}(${defender.speed})
+    // `);
     if (attacker.speed > defender.speed) {
-      messageBoard.innerHTML = `${attacker.name}'s initiative!`;
+      nextMessage.innerHTML = `${attacker.name}'s initiative!`;
     }
     else if (defender.speed > attacker.speed) {
-      messageBoard.innerHTML = `${defender.name}'s initiative!`; 
+      nextMessage.innerHTML = `${defender.name}'s initiative!`;
     }
-    else messageBoard.innerHTML = "no attacker initiative bonus";
+    else nextMessage.innerHTML = "no attacker initiative bonus";
+    messageBoard.appendChild(nextMessage);
+    setTimeout(()=> this.clear("messageBoard"), 2000);
   }
-  clearMessage(){
-    document.querySelector(".display").innerHTML = "";
+  clear(element){
+    document.querySelector(`.${element}`).innerHTML = "";
   }
 }
 

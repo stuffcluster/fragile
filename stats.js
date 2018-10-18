@@ -1,5 +1,5 @@
 export const heroStats = {
-  name: "hero",
+  name: "bonker",
   health: 3,
   attack: 5,
   defend: 3,
@@ -8,10 +8,10 @@ export const heroStats = {
 };
 
 export const monsterStats = {
-  name: "monster",
+  name: "HabFab",
   health: 3,
   attack: 3,
   defend: 4,
   stamina: 6,
-  speed: 6
+  speed: 1
 };
