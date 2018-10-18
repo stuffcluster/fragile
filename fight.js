@@ -13,7 +13,8 @@ class Fight {
     };
     return total;
   }
-  takeTurn(attacker, defender) {
+  nextTurn() {
+    let [attacker, defender] = this.fighters;
     const attackScore = this.singleRoll(6) + attacker.attack;
     const defendScore = this.singleRoll(6) + defender.defend;
     if (attackScore > defendScore) {
