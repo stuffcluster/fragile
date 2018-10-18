@@ -6,18 +6,18 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "parcel ./index.html --port 4321",
-    "predeploy": "rm -rf dist && parcel build index.html --public--url /parcel-gh-pages-deploy",
+    "predeploy": "rm -rf dist && parcel build index.html",
     "deploy": "gh-pages -d dist"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/stuffcluster/fragile.git"
+    "url": "https://spitchell.github.io/combat/"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/stuffcluster/fragile/issues"
+    "url": "https://spitchell.github.io/combat/issues"
   },
-  "homepage": "https://github.com/stuffcluster/fragile#readme"
+  "homepage": "https://spitchell.github.io/combat/"
 }
